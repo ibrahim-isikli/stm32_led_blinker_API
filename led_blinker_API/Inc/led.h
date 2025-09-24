@@ -17,6 +17,7 @@ typedef enum
 {
 	LED_OK = (uint8_t)0,
 	LED_ERR,
+	LED_ERR_NULL,
 }LED_state_t;
 
 
@@ -29,7 +30,16 @@ typedef struct
 	uint8_t enabled;
 }LED_handle;
 
+//--- func prototypes
 LED_state_t LED_init(LED_handle *h, GPIO_TypeDef *port, uint16_t pin);
+// independent of blink
+LED_state_t LED_on(LED_handle *h);
+LED_state_t LED_off(LED_handle *h);
+LED_state_t LED_toggle(LED_handle *h);
+// blink funcs
+LED_state_t LED_blink_start(LED_handle *h, uint32_t period_ms);
+LED_state_t  LED_blink_stop(LED_handle *h);
+LED_state_t  LED_tick(LED_handle *h);
 
 
 

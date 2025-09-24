@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "led.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+LED_handle user_led;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -87,7 +87,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-
+  LED_init(&user_led, USER_LED_GPIO_Port, USER_LED_Pin);
+  LED_blink_start(&user_led, 125);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -95,10 +96,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  HAL_GPIO_TogglePin(USER_LED_GPIO_Port, USER_LED_Pin);
-	  HAL_Delay(500);
+
 
     /* USER CODE BEGIN 3 */
+	  LED_tick(&user_led);
   }
   /* USER CODE END 3 */
 }
